@@ -1,0 +1,146 @@
+AD Agri Mobile App - Setup Instructions
+=====================================
+
+Prerequisites:
+-------------
+1. Node.js (LTS version recommended)
+2. npm (comes with Node.js)
+3. Expo CLI
+4. Git (optional, for version control)
+5. Python (for backend)
+6. pip (Python package manager)
+
+Installation Steps:
+-----------------
+1. Install Node.js and npm:
+   - Download and install from: https://nodejs.org/
+   - Verify installation by running:
+     node --version
+     npm --version
+
+2. Install Expo CLI globally:
+   npm install -g expo-cli
+
+3. Install Expo Go on your mobile device:
+   - Android: Search for "Expo Go" on Google Play Store
+   - iOS: Search for "Expo Go" on App Store
+
+4. Clone or copy the project to your new computer
+
+5. Navigate to the project directory and install dependencies:
+   cd mobileapp
+   npm install
+
+6. Install specific dependencies:
+   npm install @react-navigation/native @react-navigation/native-stack axios expo expo-image-picker expo-status-bar firebase react react-native react-native-safe-area-context react-native-screens
+
+7. Development Dependencies:
+   npm install --save-dev @babel/core
+
+IP Configuration:
+---------------
+1. Find your computer's IP address:
+   # On Windows:
+   ipconfig
+   # Look for IPv4 Address under your active network adapter
+
+   # On macOS/Linux:
+   ifconfig
+   # or
+   ip addr
+   # Look for inet address under your active network adapter
+
+2. Update the backend URL in App.js:
+   - Open App.js
+   - Find the BACKEND_URL configuration
+   - Replace the IP address with your computer's IP:
+     const BACKEND_URL = __DEV__
+       ? 'http://YOUR_IP_ADDRESS:5000'  // Development URL (local network)
+       : 'https://your-ngrok-url.ngrok-free.app/';  // Production URL (ngrok)
+
+Backend Setup:
+------------
+1. Navigate to the backend directory:
+   cd backend
+
+2. Create and activate a virtual environment (recommended):
+   # On Windows:
+   python -m venv venv
+   .\venv\Scripts\activate
+
+   # On macOS/Linux:
+   python3 -m venv venv
+   source venv/bin/activate
+
+3. Install backend dependencies:
+   pip install -r requirements.txt
+
+4. Start the backend server:
+   # Make sure you're in the backend directory
+   # The server will run on all network interfaces (0.0.0.0)
+   python app.py
+   # or
+   flask run --host=0.0.0.0
+
+Running the App:
+--------------
+1. Start the Expo development server:
+   # Make sure you're in the main project directory (mobileapp)
+   npm start
+   # or
+   npx expo start
+
+2. To run on specific platforms:
+   - Android: npm run android
+   - iOS: npm run ios
+   - Web: npm run web
+
+3. Using Expo Go:
+   - Start the Expo server (npm start)
+   - Scan the QR code with your phone's camera
+   - The app will open in Expo Go
+
+Additional Notes:
+---------------
+- Make sure to have the correct Firebase configuration in your project
+- The google-services.json file should be properly placed in the project root
+- If you encounter any issues with Expo, try clearing the cache:
+  expo start -c
+- Keep the backend server running while testing the mobile app
+- Make sure your mobile device and computer are on the same network for Expo Go to work
+- If you can't connect to the backend:
+  * Verify your IP address is correct in App.js
+  * Check if your firewall allows connections on port 5000
+  * Ensure your mobile device is on the same network as your computer
+
+Troubleshooting:
+--------------
+1. If you encounter dependency conflicts:
+   - Delete node_modules folder
+   - Delete package-lock.json
+   - Run npm install again
+
+2. For Expo issues:
+   - Make sure you have the latest Expo CLI
+   - Clear Expo cache: expo start -c
+   - Check if your Node.js version is compatible
+   - If Expo Go connection fails, try:
+     * Check if your phone and computer are on the same network
+     * Try using tunnel connection: expo start --tunnel
+     * Restart the Expo server
+
+3. For Firebase issues:
+   - Verify your Firebase configuration
+   - Ensure google-services.json is properly placed
+   - Check Firebase console for any configuration issues
+
+4. For Backend issues:
+   - Make sure all Python dependencies are installed
+   - Check if the virtual environment is activated
+   - Verify the backend server is running on the correct port
+   - Check if the backend URL in the mobile app matches your backend server address
+   - If connection fails:
+     * Check if the backend server is running (should see "Starting server..." message)
+     * Verify your IP address is correct in App.js
+     * Try accessing the backend directly from a browser: http://YOUR_IP:5000
+     * Check if your firewall is blocking port 5000 
